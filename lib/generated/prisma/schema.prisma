@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  active
+  inactive
+}
+
+model Category {
+  categoryId   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  picture      String?
+  categoryName String
+  categoryCode String?
+  memo         String?
+  status       Status   @default(active)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  products Product[]
+}
+
+model Product {
+  productId    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  productName  String
+  productCode  String?
+  categoryId   String   @db.Uuid
+  picture      String?
+  unit         String?
+  capacity     String?
+  sellPrice    Decimal  @default(0.00) @db.Decimal(10, 2)
+  costPrice    Decimal  @default(0.00) @db.Decimal(10, 2)
+  discountRate Int      @default(0)
+  status       Status   @default(active)
+  desc         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  category Category? @relation(fields: [categoryId], references: [categoryId])
+  stocks   Stock[]
+}
+
+model Stock {
+  stockId   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  productId String   @db.Uuid
+  quantity  Int      @default(0)
+  memo      String?
+  status    Status   @default(active)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product? @relation(fields: [productId], references: [productId])
+
+  @@index([productId])
+}
