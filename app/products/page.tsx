@@ -14,7 +14,7 @@ import { Category, Product } from "@/lib/generated/prisma";
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showDiscount, setShowDiscount] = useState(false);
@@ -22,15 +22,10 @@ export default function ProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("/api/products", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch("/api/products");
 
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
 
         const data = await response.json();
         console.log("Products data:", data);
@@ -52,12 +47,15 @@ export default function ProductsPage() {
           },
         });
 
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
 
         const data = await response.json();
-        console.log("categories data:", data);
+        console.log("Products data structure:", {
+          data,
+          isArray: Array.isArray(data),
+          firstItem: data[0],
+        });
         setCategories(data);
       } catch (error) {
         console.error("Fetch error:", error);
@@ -67,7 +65,9 @@ export default function ProductsPage() {
     fetchCategories();
   }, []);
 
-  console.log(products, "ok");
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
 
   const handleSearch = () => {
     applyFilters(searchQuery, selectedCategories, showDiscount);
