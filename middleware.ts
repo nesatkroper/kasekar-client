@@ -4,11 +4,10 @@ import { NextRequest } from "next/server"
 
 export async function middleware(request: NextRequest) {
   try {
-    const mode = process.env.MODE || "work"
+    const mode = process.env.MODE || "active"
     console.log(`[Middleware] MODE=${mode}, Path=${request.nextUrl.pathname}`)
 
     const apiUrl = new URL('/api/system', request.nextUrl.origin);
-
     const systemResponse = await fetch(apiUrl, {
       headers: { 'Content-Type': 'application/json' },
     });
@@ -20,13 +19,18 @@ export async function middleware(request: NextRequest) {
     }
 
     const systemData = await systemResponse.json();
-
     console.log(systemData)
 
-    if (mode.toLowerCase() === "block") {
+    if (systemData?.status.toLowerCase() === "inactive") {
       if (!request.nextUrl.pathname.startsWith("/blocked")) {
         console.log(`[Middleware] Redirecting to blocked page`)
         return NextResponse.redirect(new URL("/blocked", request.url))
+      }
+    }
+    else if (systemData?.status.toLowerCase() === "active") {
+      if (request.nextUrl.pathname.startsWith("/blocked")) {
+        console.log(`[Middleware] Redirecting to home page`)
+        return NextResponse.redirect(new URL("/", request.url))
       }
     }
 
@@ -43,7 +47,6 @@ export async function middleware(request: NextRequest) {
 
 }
 
-// Match all paths except static files and API routes
 export const config = {
   matcher: [
     /*
