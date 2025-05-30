@@ -2,35 +2,35 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 export function middleware(request: NextRequest) {
-  // Get the MODE environment variable
-  const mode = process.env.MODE
+  // Get the MODE environment variable - be more defensive with the check
+  const mode = process.env.MODE || "work"
 
-  console.log("Middleware running - MODE:", mode) // Debug log
-  console.log("Current path:", request.nextUrl.pathname) // Debug log
+  // Debug information (will appear in server logs)
+  console.log(`[Middleware] MODE=${mode}, Path=${request.nextUrl.pathname}`)
 
-  // Only redirect to blocked page if MODE is explicitly set to "block"
-  if (mode === "block") {
-    // Don't redirect if already on the blocked page to avoid infinite loop
-    if (request.nextUrl.pathname !== "/blocked") {
-      console.log("Redirecting to blocked page") // Debug log
+  // Force lowercase comparison to avoid case sensitivity issues
+  if (mode.toLowerCase() === "block") {
+    // Don't redirect if already on the blocked page
+    if (!request.nextUrl.pathname.startsWith("/blocked")) {
+      console.log(`[Middleware] Redirecting to blocked page`)
       return NextResponse.redirect(new URL("/blocked", request.url))
     }
   }
 
-  // For any other MODE value (including "work" or undefined), allow normal operation
+  // For any other MODE value, allow normal operation
   return NextResponse.next()
 }
 
-// Configure which paths the middleware should run on
+// Match all paths except static files and API routes
 export const config = {
-  // Match all paths except static files
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - api (API routes)
      */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api).*)",
   ],
 }
