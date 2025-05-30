@@ -11,7 +11,7 @@ export const metadata = {
   title: "NatureBoost Fertilizers | Premium Agricultural Solutions",
   description:
     "High-quality fertilizers for farmers, gardeners, and agricultural professionals. Sustainable solutions for better growth.",
-    generator: 'v0.dev'
+    generator: 'Dev. Suon Phanun'
 }
 
 export default function RootLayout({
@@ -33,3 +33,4 @@ export default function RootLayout({
     </html>
   )
 }
+
