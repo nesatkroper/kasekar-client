@@ -1,24 +1,46 @@
 import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
+import { NextRequest } from "next/server"
 
-export function middleware(request: NextRequest) {
-  // Get the MODE environment variable - be more defensive with the check
-  const mode = process.env.MODE || "work"
 
-  // Debug information (will appear in server logs)
-  console.log(`[Middleware] MODE=${mode}, Path=${request.nextUrl.pathname}`)
+export async function middleware(request: NextRequest) {
+  try {
+    const mode = process.env.MODE || "work"
+    console.log(`[Middleware] MODE=${mode}, Path=${request.nextUrl.pathname}`)
 
-  // Force lowercase comparison to avoid case sensitivity issues
-  if (mode.toLowerCase() === "block") {
-    // Don't redirect if already on the blocked page
-    if (!request.nextUrl.pathname.startsWith("/blocked")) {
-      console.log(`[Middleware] Redirecting to blocked page`)
-      return NextResponse.redirect(new URL("/blocked", request.url))
+    const apiUrl = new URL('/api/system', request.nextUrl.origin);
+
+    const systemResponse = await fetch(apiUrl, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!systemResponse.ok) {
+      const errorData = await systemResponse.json();
+      console.error('API Error:', errorData);
+      throw new Error(errorData.error || 'Failed to fetch system data');
     }
+
+    const systemData = await systemResponse.json();
+
+    console.log(systemData)
+
+    if (mode.toLowerCase() === "block") {
+      if (!request.nextUrl.pathname.startsWith("/blocked")) {
+        console.log(`[Middleware] Redirecting to blocked page`)
+        return NextResponse.redirect(new URL("/blocked", request.url))
+      }
+    }
+
+
+    return NextResponse.next()
+  } catch (error) {
+    console.error("[Middleware] Error:", error)
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    )
+
   }
 
-  // For any other MODE value, allow normal operation
-  return NextResponse.next()
 }
 
 // Match all paths except static files and API routes

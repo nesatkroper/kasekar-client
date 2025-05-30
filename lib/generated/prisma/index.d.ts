@@ -28,6 +28,11 @@ export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
  * 
  */
 export type Stock = $Result.DefaultSelection<Prisma.$StockPayload>
+/**
+ * Model System
+ * 
+ */
+export type System = $Result.DefaultSelection<Prisma.$SystemPayload>
 
 /**
  * Enums
@@ -200,6 +205,16 @@ export class PrismaClient<
     * ```
     */
   get stock(): Prisma.StockDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.system`: Exposes CRUD operations for the **System** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Systems
+    * const systems = await prisma.system.findMany()
+    * ```
+    */
+  get system(): Prisma.SystemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -258,8 +273,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -642,7 +657,8 @@ export namespace Prisma {
   export const ModelName: {
     Category: 'Category',
     Product: 'Product',
-    Stock: 'Stock'
+    Stock: 'Stock',
+    System: 'System'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -661,7 +677,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "category" | "product" | "stock"
+      modelProps: "category" | "product" | "stock" | "system"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -887,6 +903,80 @@ export namespace Prisma {
           }
         }
       }
+      System: {
+        payload: Prisma.$SystemPayload<ExtArgs>
+        fields: Prisma.SystemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SystemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SystemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>
+          }
+          findFirst: {
+            args: Prisma.SystemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SystemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>
+          }
+          findMany: {
+            args: Prisma.SystemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>[]
+          }
+          create: {
+            args: Prisma.SystemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>
+          }
+          createMany: {
+            args: Prisma.SystemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SystemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>[]
+          }
+          delete: {
+            args: Prisma.SystemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>
+          }
+          update: {
+            args: Prisma.SystemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>
+          }
+          deleteMany: {
+            args: Prisma.SystemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SystemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SystemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>[]
+          }
+          upsert: {
+            args: Prisma.SystemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SystemPayload>
+          }
+          aggregate: {
+            args: Prisma.SystemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSystem>
+          }
+          groupBy: {
+            args: Prisma.SystemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SystemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SystemCountArgs<ExtArgs>
+            result: $Utils.Optional<SystemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -974,6 +1064,7 @@ export namespace Prisma {
     category?: CategoryOmit
     product?: ProductOmit
     stock?: StockOmit
+    system?: SystemOmit
   }
 
   /* Types for Logging */
@@ -4642,6 +4733,1118 @@ export namespace Prisma {
 
 
   /**
+   * Model System
+   */
+
+  export type AggregateSystem = {
+    _count: SystemCountAggregateOutputType | null
+    _min: SystemMinAggregateOutputType | null
+    _max: SystemMaxAggregateOutputType | null
+  }
+
+  export type SystemMinAggregateOutputType = {
+    systemId: string | null
+    systemName: string | null
+    systemType: string | null
+    ownerName: string | null
+    ownerEmail: string | null
+    ownerPhone: string | null
+    apiKey: string | null
+    apiSecret: string | null
+    apiUrl: string | null
+    apiVersion: string | null
+    description: string | null
+    status: $Enums.Status | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SystemMaxAggregateOutputType = {
+    systemId: string | null
+    systemName: string | null
+    systemType: string | null
+    ownerName: string | null
+    ownerEmail: string | null
+    ownerPhone: string | null
+    apiKey: string | null
+    apiSecret: string | null
+    apiUrl: string | null
+    apiVersion: string | null
+    description: string | null
+    status: $Enums.Status | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SystemCountAggregateOutputType = {
+    systemId: number
+    systemName: number
+    systemType: number
+    ownerName: number
+    ownerEmail: number
+    ownerPhone: number
+    apiKey: number
+    apiSecret: number
+    apiUrl: number
+    apiVersion: number
+    description: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SystemMinAggregateInputType = {
+    systemId?: true
+    systemName?: true
+    systemType?: true
+    ownerName?: true
+    ownerEmail?: true
+    ownerPhone?: true
+    apiKey?: true
+    apiSecret?: true
+    apiUrl?: true
+    apiVersion?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SystemMaxAggregateInputType = {
+    systemId?: true
+    systemName?: true
+    systemType?: true
+    ownerName?: true
+    ownerEmail?: true
+    ownerPhone?: true
+    apiKey?: true
+    apiSecret?: true
+    apiUrl?: true
+    apiVersion?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SystemCountAggregateInputType = {
+    systemId?: true
+    systemName?: true
+    systemType?: true
+    ownerName?: true
+    ownerEmail?: true
+    ownerPhone?: true
+    apiKey?: true
+    apiSecret?: true
+    apiUrl?: true
+    apiVersion?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SystemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which System to aggregate.
+     */
+    where?: SystemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Systems to fetch.
+     */
+    orderBy?: SystemOrderByWithRelationInput | SystemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SystemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Systems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Systems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Systems
+    **/
+    _count?: true | SystemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SystemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SystemMaxAggregateInputType
+  }
+
+  export type GetSystemAggregateType<T extends SystemAggregateArgs> = {
+        [P in keyof T & keyof AggregateSystem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSystem[P]>
+      : GetScalarType<T[P], AggregateSystem[P]>
+  }
+
+
+
+
+  export type SystemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SystemWhereInput
+    orderBy?: SystemOrderByWithAggregationInput | SystemOrderByWithAggregationInput[]
+    by: SystemScalarFieldEnum[] | SystemScalarFieldEnum
+    having?: SystemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SystemCountAggregateInputType | true
+    _min?: SystemMinAggregateInputType
+    _max?: SystemMaxAggregateInputType
+  }
+
+  export type SystemGroupByOutputType = {
+    systemId: string
+    systemName: string
+    systemType: string
+    ownerName: string | null
+    ownerEmail: string | null
+    ownerPhone: string | null
+    apiKey: string
+    apiSecret: string
+    apiUrl: string
+    apiVersion: string
+    description: string | null
+    status: $Enums.Status
+    createdAt: Date
+    updatedAt: Date
+    _count: SystemCountAggregateOutputType | null
+    _min: SystemMinAggregateOutputType | null
+    _max: SystemMaxAggregateOutputType | null
+  }
+
+  type GetSystemGroupByPayload<T extends SystemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SystemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SystemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SystemGroupByOutputType[P]>
+            : GetScalarType<T[P], SystemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SystemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    systemId?: boolean
+    systemName?: boolean
+    systemType?: boolean
+    ownerName?: boolean
+    ownerEmail?: boolean
+    ownerPhone?: boolean
+    apiKey?: boolean
+    apiSecret?: boolean
+    apiUrl?: boolean
+    apiVersion?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["system"]>
+
+  export type SystemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    systemId?: boolean
+    systemName?: boolean
+    systemType?: boolean
+    ownerName?: boolean
+    ownerEmail?: boolean
+    ownerPhone?: boolean
+    apiKey?: boolean
+    apiSecret?: boolean
+    apiUrl?: boolean
+    apiVersion?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["system"]>
+
+  export type SystemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    systemId?: boolean
+    systemName?: boolean
+    systemType?: boolean
+    ownerName?: boolean
+    ownerEmail?: boolean
+    ownerPhone?: boolean
+    apiKey?: boolean
+    apiSecret?: boolean
+    apiUrl?: boolean
+    apiVersion?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["system"]>
+
+  export type SystemSelectScalar = {
+    systemId?: boolean
+    systemName?: boolean
+    systemType?: boolean
+    ownerName?: boolean
+    ownerEmail?: boolean
+    ownerPhone?: boolean
+    apiKey?: boolean
+    apiSecret?: boolean
+    apiUrl?: boolean
+    apiVersion?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SystemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"systemId" | "systemName" | "systemType" | "ownerName" | "ownerEmail" | "ownerPhone" | "apiKey" | "apiSecret" | "apiUrl" | "apiVersion" | "description" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["system"]>
+
+  export type $SystemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "System"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      systemId: string
+      systemName: string
+      systemType: string
+      ownerName: string | null
+      ownerEmail: string | null
+      ownerPhone: string | null
+      apiKey: string
+      apiSecret: string
+      apiUrl: string
+      apiVersion: string
+      description: string | null
+      status: $Enums.Status
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["system"]>
+    composites: {}
+  }
+
+  type SystemGetPayload<S extends boolean | null | undefined | SystemDefaultArgs> = $Result.GetResult<Prisma.$SystemPayload, S>
+
+  type SystemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SystemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SystemCountAggregateInputType | true
+    }
+
+  export interface SystemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['System'], meta: { name: 'System' } }
+    /**
+     * Find zero or one System that matches the filter.
+     * @param {SystemFindUniqueArgs} args - Arguments to find a System
+     * @example
+     * // Get one System
+     * const system = await prisma.system.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SystemFindUniqueArgs>(args: SelectSubset<T, SystemFindUniqueArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one System that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SystemFindUniqueOrThrowArgs} args - Arguments to find a System
+     * @example
+     * // Get one System
+     * const system = await prisma.system.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SystemFindUniqueOrThrowArgs>(args: SelectSubset<T, SystemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first System that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemFindFirstArgs} args - Arguments to find a System
+     * @example
+     * // Get one System
+     * const system = await prisma.system.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SystemFindFirstArgs>(args?: SelectSubset<T, SystemFindFirstArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first System that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemFindFirstOrThrowArgs} args - Arguments to find a System
+     * @example
+     * // Get one System
+     * const system = await prisma.system.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SystemFindFirstOrThrowArgs>(args?: SelectSubset<T, SystemFindFirstOrThrowArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Systems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Systems
+     * const systems = await prisma.system.findMany()
+     * 
+     * // Get first 10 Systems
+     * const systems = await prisma.system.findMany({ take: 10 })
+     * 
+     * // Only select the `systemId`
+     * const systemWithSystemIdOnly = await prisma.system.findMany({ select: { systemId: true } })
+     * 
+     */
+    findMany<T extends SystemFindManyArgs>(args?: SelectSubset<T, SystemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a System.
+     * @param {SystemCreateArgs} args - Arguments to create a System.
+     * @example
+     * // Create one System
+     * const System = await prisma.system.create({
+     *   data: {
+     *     // ... data to create a System
+     *   }
+     * })
+     * 
+     */
+    create<T extends SystemCreateArgs>(args: SelectSubset<T, SystemCreateArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Systems.
+     * @param {SystemCreateManyArgs} args - Arguments to create many Systems.
+     * @example
+     * // Create many Systems
+     * const system = await prisma.system.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SystemCreateManyArgs>(args?: SelectSubset<T, SystemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Systems and returns the data saved in the database.
+     * @param {SystemCreateManyAndReturnArgs} args - Arguments to create many Systems.
+     * @example
+     * // Create many Systems
+     * const system = await prisma.system.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Systems and only return the `systemId`
+     * const systemWithSystemIdOnly = await prisma.system.createManyAndReturn({
+     *   select: { systemId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SystemCreateManyAndReturnArgs>(args?: SelectSubset<T, SystemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a System.
+     * @param {SystemDeleteArgs} args - Arguments to delete one System.
+     * @example
+     * // Delete one System
+     * const System = await prisma.system.delete({
+     *   where: {
+     *     // ... filter to delete one System
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SystemDeleteArgs>(args: SelectSubset<T, SystemDeleteArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one System.
+     * @param {SystemUpdateArgs} args - Arguments to update one System.
+     * @example
+     * // Update one System
+     * const system = await prisma.system.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SystemUpdateArgs>(args: SelectSubset<T, SystemUpdateArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Systems.
+     * @param {SystemDeleteManyArgs} args - Arguments to filter Systems to delete.
+     * @example
+     * // Delete a few Systems
+     * const { count } = await prisma.system.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SystemDeleteManyArgs>(args?: SelectSubset<T, SystemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Systems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Systems
+     * const system = await prisma.system.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SystemUpdateManyArgs>(args: SelectSubset<T, SystemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Systems and returns the data updated in the database.
+     * @param {SystemUpdateManyAndReturnArgs} args - Arguments to update many Systems.
+     * @example
+     * // Update many Systems
+     * const system = await prisma.system.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Systems and only return the `systemId`
+     * const systemWithSystemIdOnly = await prisma.system.updateManyAndReturn({
+     *   select: { systemId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SystemUpdateManyAndReturnArgs>(args: SelectSubset<T, SystemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one System.
+     * @param {SystemUpsertArgs} args - Arguments to update or create a System.
+     * @example
+     * // Update or create a System
+     * const system = await prisma.system.upsert({
+     *   create: {
+     *     // ... data to create a System
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the System we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SystemUpsertArgs>(args: SelectSubset<T, SystemUpsertArgs<ExtArgs>>): Prisma__SystemClient<$Result.GetResult<Prisma.$SystemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Systems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemCountArgs} args - Arguments to filter Systems to count.
+     * @example
+     * // Count the number of Systems
+     * const count = await prisma.system.count({
+     *   where: {
+     *     // ... the filter for the Systems we want to count
+     *   }
+     * })
+    **/
+    count<T extends SystemCountArgs>(
+      args?: Subset<T, SystemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SystemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a System.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SystemAggregateArgs>(args: Subset<T, SystemAggregateArgs>): Prisma.PrismaPromise<GetSystemAggregateType<T>>
+
+    /**
+     * Group by System.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SystemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SystemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SystemGroupByArgs['orderBy'] }
+        : { orderBy?: SystemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SystemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSystemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the System model
+   */
+  readonly fields: SystemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for System.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SystemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the System model
+   */
+  interface SystemFieldRefs {
+    readonly systemId: FieldRef<"System", 'String'>
+    readonly systemName: FieldRef<"System", 'String'>
+    readonly systemType: FieldRef<"System", 'String'>
+    readonly ownerName: FieldRef<"System", 'String'>
+    readonly ownerEmail: FieldRef<"System", 'String'>
+    readonly ownerPhone: FieldRef<"System", 'String'>
+    readonly apiKey: FieldRef<"System", 'String'>
+    readonly apiSecret: FieldRef<"System", 'String'>
+    readonly apiUrl: FieldRef<"System", 'String'>
+    readonly apiVersion: FieldRef<"System", 'String'>
+    readonly description: FieldRef<"System", 'String'>
+    readonly status: FieldRef<"System", 'Status'>
+    readonly createdAt: FieldRef<"System", 'DateTime'>
+    readonly updatedAt: FieldRef<"System", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * System findUnique
+   */
+  export type SystemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * Filter, which System to fetch.
+     */
+    where: SystemWhereUniqueInput
+  }
+
+  /**
+   * System findUniqueOrThrow
+   */
+  export type SystemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * Filter, which System to fetch.
+     */
+    where: SystemWhereUniqueInput
+  }
+
+  /**
+   * System findFirst
+   */
+  export type SystemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * Filter, which System to fetch.
+     */
+    where?: SystemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Systems to fetch.
+     */
+    orderBy?: SystemOrderByWithRelationInput | SystemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Systems.
+     */
+    cursor?: SystemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Systems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Systems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Systems.
+     */
+    distinct?: SystemScalarFieldEnum | SystemScalarFieldEnum[]
+  }
+
+  /**
+   * System findFirstOrThrow
+   */
+  export type SystemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * Filter, which System to fetch.
+     */
+    where?: SystemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Systems to fetch.
+     */
+    orderBy?: SystemOrderByWithRelationInput | SystemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Systems.
+     */
+    cursor?: SystemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Systems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Systems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Systems.
+     */
+    distinct?: SystemScalarFieldEnum | SystemScalarFieldEnum[]
+  }
+
+  /**
+   * System findMany
+   */
+  export type SystemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * Filter, which Systems to fetch.
+     */
+    where?: SystemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Systems to fetch.
+     */
+    orderBy?: SystemOrderByWithRelationInput | SystemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Systems.
+     */
+    cursor?: SystemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Systems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Systems.
+     */
+    skip?: number
+    distinct?: SystemScalarFieldEnum | SystemScalarFieldEnum[]
+  }
+
+  /**
+   * System create
+   */
+  export type SystemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * The data needed to create a System.
+     */
+    data: XOR<SystemCreateInput, SystemUncheckedCreateInput>
+  }
+
+  /**
+   * System createMany
+   */
+  export type SystemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Systems.
+     */
+    data: SystemCreateManyInput | SystemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * System createManyAndReturn
+   */
+  export type SystemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * The data used to create many Systems.
+     */
+    data: SystemCreateManyInput | SystemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * System update
+   */
+  export type SystemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * The data needed to update a System.
+     */
+    data: XOR<SystemUpdateInput, SystemUncheckedUpdateInput>
+    /**
+     * Choose, which System to update.
+     */
+    where: SystemWhereUniqueInput
+  }
+
+  /**
+   * System updateMany
+   */
+  export type SystemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Systems.
+     */
+    data: XOR<SystemUpdateManyMutationInput, SystemUncheckedUpdateManyInput>
+    /**
+     * Filter which Systems to update
+     */
+    where?: SystemWhereInput
+    /**
+     * Limit how many Systems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * System updateManyAndReturn
+   */
+  export type SystemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * The data used to update Systems.
+     */
+    data: XOR<SystemUpdateManyMutationInput, SystemUncheckedUpdateManyInput>
+    /**
+     * Filter which Systems to update
+     */
+    where?: SystemWhereInput
+    /**
+     * Limit how many Systems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * System upsert
+   */
+  export type SystemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * The filter to search for the System to update in case it exists.
+     */
+    where: SystemWhereUniqueInput
+    /**
+     * In case the System found by the `where` argument doesn't exist, create a new System with this data.
+     */
+    create: XOR<SystemCreateInput, SystemUncheckedCreateInput>
+    /**
+     * In case the System was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SystemUpdateInput, SystemUncheckedUpdateInput>
+  }
+
+  /**
+   * System delete
+   */
+  export type SystemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+    /**
+     * Filter which System to delete.
+     */
+    where: SystemWhereUniqueInput
+  }
+
+  /**
+   * System deleteMany
+   */
+  export type SystemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Systems to delete
+     */
+    where?: SystemWhereInput
+    /**
+     * Limit how many Systems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * System without action
+   */
+  export type SystemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the System
+     */
+    select?: SystemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the System
+     */
+    omit?: SystemOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4700,6 +5903,26 @@ export namespace Prisma {
   };
 
   export type StockScalarFieldEnum = (typeof StockScalarFieldEnum)[keyof typeof StockScalarFieldEnum]
+
+
+  export const SystemScalarFieldEnum: {
+    systemId: 'systemId',
+    systemName: 'systemName',
+    systemType: 'systemType',
+    ownerName: 'ownerName',
+    ownerEmail: 'ownerEmail',
+    ownerPhone: 'ownerPhone',
+    apiKey: 'apiKey',
+    apiSecret: 'apiSecret',
+    apiUrl: 'apiUrl',
+    apiVersion: 'apiVersion',
+    description: 'description',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SystemScalarFieldEnum = (typeof SystemScalarFieldEnum)[keyof typeof SystemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5060,6 +6283,103 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Stock"> | Date | string
   }
 
+  export type SystemWhereInput = {
+    AND?: SystemWhereInput | SystemWhereInput[]
+    OR?: SystemWhereInput[]
+    NOT?: SystemWhereInput | SystemWhereInput[]
+    systemId?: UuidFilter<"System"> | string
+    systemName?: StringFilter<"System"> | string
+    systemType?: StringFilter<"System"> | string
+    ownerName?: StringNullableFilter<"System"> | string | null
+    ownerEmail?: StringNullableFilter<"System"> | string | null
+    ownerPhone?: StringNullableFilter<"System"> | string | null
+    apiKey?: StringFilter<"System"> | string
+    apiSecret?: StringFilter<"System"> | string
+    apiUrl?: StringFilter<"System"> | string
+    apiVersion?: StringFilter<"System"> | string
+    description?: StringNullableFilter<"System"> | string | null
+    status?: EnumStatusFilter<"System"> | $Enums.Status
+    createdAt?: DateTimeFilter<"System"> | Date | string
+    updatedAt?: DateTimeFilter<"System"> | Date | string
+  }
+
+  export type SystemOrderByWithRelationInput = {
+    systemId?: SortOrder
+    systemName?: SortOrder
+    systemType?: SortOrder
+    ownerName?: SortOrderInput | SortOrder
+    ownerEmail?: SortOrderInput | SortOrder
+    ownerPhone?: SortOrderInput | SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiUrl?: SortOrder
+    apiVersion?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SystemWhereUniqueInput = Prisma.AtLeast<{
+    systemId?: string
+    systemName?: string
+    apiKey?: string
+    apiSecret?: string
+    apiUrl?: string
+    AND?: SystemWhereInput | SystemWhereInput[]
+    OR?: SystemWhereInput[]
+    NOT?: SystemWhereInput | SystemWhereInput[]
+    systemType?: StringFilter<"System"> | string
+    ownerName?: StringNullableFilter<"System"> | string | null
+    ownerEmail?: StringNullableFilter<"System"> | string | null
+    ownerPhone?: StringNullableFilter<"System"> | string | null
+    apiVersion?: StringFilter<"System"> | string
+    description?: StringNullableFilter<"System"> | string | null
+    status?: EnumStatusFilter<"System"> | $Enums.Status
+    createdAt?: DateTimeFilter<"System"> | Date | string
+    updatedAt?: DateTimeFilter<"System"> | Date | string
+  }, "systemId" | "systemName" | "apiKey" | "apiSecret" | "apiUrl">
+
+  export type SystemOrderByWithAggregationInput = {
+    systemId?: SortOrder
+    systemName?: SortOrder
+    systemType?: SortOrder
+    ownerName?: SortOrderInput | SortOrder
+    ownerEmail?: SortOrderInput | SortOrder
+    ownerPhone?: SortOrderInput | SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiUrl?: SortOrder
+    apiVersion?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SystemCountOrderByAggregateInput
+    _max?: SystemMaxOrderByAggregateInput
+    _min?: SystemMinOrderByAggregateInput
+  }
+
+  export type SystemScalarWhereWithAggregatesInput = {
+    AND?: SystemScalarWhereWithAggregatesInput | SystemScalarWhereWithAggregatesInput[]
+    OR?: SystemScalarWhereWithAggregatesInput[]
+    NOT?: SystemScalarWhereWithAggregatesInput | SystemScalarWhereWithAggregatesInput[]
+    systemId?: UuidWithAggregatesFilter<"System"> | string
+    systemName?: StringWithAggregatesFilter<"System"> | string
+    systemType?: StringWithAggregatesFilter<"System"> | string
+    ownerName?: StringNullableWithAggregatesFilter<"System"> | string | null
+    ownerEmail?: StringNullableWithAggregatesFilter<"System"> | string | null
+    ownerPhone?: StringNullableWithAggregatesFilter<"System"> | string | null
+    apiKey?: StringWithAggregatesFilter<"System"> | string
+    apiSecret?: StringWithAggregatesFilter<"System"> | string
+    apiUrl?: StringWithAggregatesFilter<"System"> | string
+    apiVersion?: StringWithAggregatesFilter<"System"> | string
+    description?: StringNullableWithAggregatesFilter<"System"> | string | null
+    status?: EnumStatusWithAggregatesFilter<"System"> | $Enums.Status
+    createdAt?: DateTimeWithAggregatesFilter<"System"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"System"> | Date | string
+  }
+
   export type CategoryCreateInput = {
     categoryId?: string
     picture?: string | null
@@ -5327,6 +6647,125 @@ export namespace Prisma {
     productId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     memo?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SystemCreateInput = {
+    systemId?: string
+    systemName?: string
+    systemType?: string
+    ownerName?: string | null
+    ownerEmail?: string | null
+    ownerPhone?: string | null
+    apiKey: string
+    apiSecret: string
+    apiUrl: string
+    apiVersion?: string
+    description?: string | null
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SystemUncheckedCreateInput = {
+    systemId?: string
+    systemName?: string
+    systemType?: string
+    ownerName?: string | null
+    ownerEmail?: string | null
+    ownerPhone?: string | null
+    apiKey: string
+    apiSecret: string
+    apiUrl: string
+    apiVersion?: string
+    description?: string | null
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SystemUpdateInput = {
+    systemId?: StringFieldUpdateOperationsInput | string
+    systemName?: StringFieldUpdateOperationsInput | string
+    systemType?: StringFieldUpdateOperationsInput | string
+    ownerName?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: StringFieldUpdateOperationsInput | string
+    apiUrl?: StringFieldUpdateOperationsInput | string
+    apiVersion?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SystemUncheckedUpdateInput = {
+    systemId?: StringFieldUpdateOperationsInput | string
+    systemName?: StringFieldUpdateOperationsInput | string
+    systemType?: StringFieldUpdateOperationsInput | string
+    ownerName?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: StringFieldUpdateOperationsInput | string
+    apiUrl?: StringFieldUpdateOperationsInput | string
+    apiVersion?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SystemCreateManyInput = {
+    systemId?: string
+    systemName?: string
+    systemType?: string
+    ownerName?: string | null
+    ownerEmail?: string | null
+    ownerPhone?: string | null
+    apiKey: string
+    apiSecret: string
+    apiUrl: string
+    apiVersion?: string
+    description?: string | null
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SystemUpdateManyMutationInput = {
+    systemId?: StringFieldUpdateOperationsInput | string
+    systemName?: StringFieldUpdateOperationsInput | string
+    systemType?: StringFieldUpdateOperationsInput | string
+    ownerName?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: StringFieldUpdateOperationsInput | string
+    apiUrl?: StringFieldUpdateOperationsInput | string
+    apiVersion?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SystemUncheckedUpdateManyInput = {
+    systemId?: StringFieldUpdateOperationsInput | string
+    systemName?: StringFieldUpdateOperationsInput | string
+    systemType?: StringFieldUpdateOperationsInput | string
+    ownerName?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    apiKey?: StringFieldUpdateOperationsInput | string
+    apiSecret?: StringFieldUpdateOperationsInput | string
+    apiUrl?: StringFieldUpdateOperationsInput | string
+    apiVersion?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5688,6 +7127,57 @@ export namespace Prisma {
 
   export type StockSumOrderByAggregateInput = {
     quantity?: SortOrder
+  }
+
+  export type SystemCountOrderByAggregateInput = {
+    systemId?: SortOrder
+    systemName?: SortOrder
+    systemType?: SortOrder
+    ownerName?: SortOrder
+    ownerEmail?: SortOrder
+    ownerPhone?: SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiUrl?: SortOrder
+    apiVersion?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SystemMaxOrderByAggregateInput = {
+    systemId?: SortOrder
+    systemName?: SortOrder
+    systemType?: SortOrder
+    ownerName?: SortOrder
+    ownerEmail?: SortOrder
+    ownerPhone?: SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiUrl?: SortOrder
+    apiVersion?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SystemMinOrderByAggregateInput = {
+    systemId?: SortOrder
+    systemName?: SortOrder
+    systemType?: SortOrder
+    ownerName?: SortOrder
+    ownerEmail?: SortOrder
+    ownerPhone?: SortOrder
+    apiKey?: SortOrder
+    apiSecret?: SortOrder
+    apiUrl?: SortOrder
+    apiVersion?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProductCreateNestedManyWithoutCategoryInput = {
